@@ -102,16 +102,16 @@ getlen:
 	; count = strlen(intstr) including null byte.
 	; sptr pointed at null byte
 
-	dec	count	   ; = strlen not including null byte.
+	dec	count	    ; = strlen not including null byte.
 	sub	sptr, count ; pointed at first char.
-	dec	count	   ; Decremented to function as 0 index.
-	imul	count, 50  ; 3rd Dimension index.
+	dec	count	    ; Decremented to function as 0 index.
+	imul	count, 50   ; 3rd Dimension index.
 
 getrom: 
-	movzx	eax, byte [sptr]	; load char int
-	push	eax		; pass to ctoi
-	call 	ctoi		; eax=ctoi(*sptr);
-	add	esp, 4		; clean stack
+	movzx	eax, byte [sptr]  ; load char int
+	push	eax		  ; pass to ctoi
+	call 	ctoi		  ; eax=ctoi(*sptr);
+	add	esp, 4		  ; clean stack
 
 	imul	eax, 5		; 2nd dimension (str   dimension)
 	add	eax, count 	; 3rd dimension (digit dimension)
