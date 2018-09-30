@@ -6,12 +6,20 @@
  */
 
 #include "cdecl.h"
+#include "stdlib.h"
+#include "stdio.h"
+int PRE_CDECL asm_main( char *) POST_CDECL;
 
-int PRE_CDECL asm_main( void ) POST_CDECL;
-
-int main()
+int main(int argc, char *argv[])
 {
-    int ret_status;
-    ret_status = asm_main();
-    return ret_status;
+	// ERROR CATCHING
+
+    if (argc<1 || atoi(argv[1]) <= 0 || atoi(argv[1])>3999) {
+	printf("Please enter at least one argument of an integer greater than zero and less than 4000");
+	return 0;
+}
+
+	// Pass arg to asm
+    asm_main(argv[1]);
+    return 0; // Exit C
 }
