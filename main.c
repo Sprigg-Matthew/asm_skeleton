@@ -2,7 +2,7 @@
  * file: main.c
  * main C program that uses assembly routine in prog.asm
  * to create executable:
- * gcc:   gcc -m32 -o main main.c asm_main.o asm_io.o
+ * gcc:   gcc -g -m32 -o main main.c asm_main.o asm_io.o
  */
 
 #include "cdecl.h"
@@ -12,14 +12,13 @@ int PRE_CDECL asm_main( char *) POST_CDECL;
 
 int main(int argc, char *argv[])
 {
-	// ERROR CATCHING
-
+    // ERROR CATCHING
     if (argc<1 || atoi(argv[1]) <= 0 || atoi(argv[1])>3999) {
-	printf("Please enter at least one argument of an integer greater than zero and less than 4000");
+	printf("Please enter argument of an integer greater than zero and less than 4000\n");
 	return 0;
-}
+	}
 
-	// Pass arg to asm
+    // Pass arg to asm
     asm_main(argv[1]);
     return 0; // Exit C
 }
