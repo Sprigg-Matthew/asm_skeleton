@@ -93,7 +93,7 @@ asm_main:
 	; Get intstr length.
 	mov	count, 0 	    ; intiailize count
 getlen:
-	mov     sptr, [intstr]	    ; *(&intstr[0]+count)	
+	mov     sptr, [intstr]	    ; *(&intstr[0]+count)
 	add	sptr, count
 	inc	count		    ; count++
 	cmp	byte [sptr], 0	    ; break if null byte.
@@ -108,10 +108,9 @@ getlen:
 	imul	count, 50   ; 3rd Dimension index.
 
 getrom: 
-	movzx	eax, byte [sptr]  ; load char int
-	push	eax		  ; pass to ctoi
-	call 	ctoi		  ; eax=ctoi(*sptr);
-	add	esp, 4		  ; clean stack
+	movzx	eax, byte [sptr]; load char ascii int
+	sub	eax, 48		; convert from ASCII to int
+				; ASCII 0 - 9 is 48 - 57.
 
 	imul	eax, 5		; 2nd dimension (str   dimension)
 	add	eax, count 	; 3rd dimension (digit dimension)
