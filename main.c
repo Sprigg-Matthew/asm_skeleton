@@ -19,6 +19,5 @@ int main(int argc, char *argv[])
 	}
 
     // Pass arg to asm
-    asm_main(argv[1]);
-    return 0; // Exit C
+    return asm_main(argv[1]); // Return exit code.
 }

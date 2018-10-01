@@ -66,7 +66,6 @@ rom: 	db  0,   0, 0, 0, 0, \
 ;
 segment .text
         global  asm_main
-	extern  ctoi
 
 
 ;--------------------------------------------------------
@@ -91,6 +90,7 @@ asm_main:
 ; CODE							;
 ;--------------------------------------------------------
 	; Get intstr length.
+	; Count each byte in char string until null byte.
 	mov	count, 0 	    ; intiailize count
 getlen:
 	mov     sptr, [intstr]	    ; *(&intstr[0]+count)
@@ -107,6 +107,9 @@ getlen:
 	dec	count	    ; Decremented to function as 0 index.
 	imul	count, 50   ; 3rd Dimension index.
 
+	; Starting with most significant digit of ASCII int str.
+	; Thusly, third dimension must be pointed at end of array.
+	; Second dimension
 getrom: 
 	movzx	eax, byte [sptr]; load char ascii int
 	sub	eax, 48		; convert from ASCII to int
@@ -131,8 +134,3 @@ getrom:
         mov     eax, 0            ; return back to C
         leave
         ret
-
-
-;--------------------------------------------------------
-; FUNCTIONS / SUBPROGRAMS			 	;
-;--------------------------------------------------------
